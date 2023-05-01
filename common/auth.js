@@ -31,7 +31,7 @@ const validate = async(req,res,next)=>{
         if(Math.floor((+new Date())/1000) < data.exp){
             next()
         }else{
-            res.status(400).send({
+            res.status(401).send({
                 message:"Token Expired!"
             })
         }

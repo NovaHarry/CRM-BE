@@ -11,7 +11,7 @@ mongoose.connect(dbUrl);
 /* GET ALL USERS */
 router.get('/', validate,roleAdminGuard, async(req, res, next)=>{
   try{
-    let users = await userModel.find();
+    let users = await userModel.find({},{password:0});
     res.status(200).send({
       users,
       message:"Users data fetch successfull"
@@ -98,7 +98,7 @@ router.post('/login',async(req,res)=>{
 }
   else{
     res.status(400).send({
-      message:"User already exist!"
+      message:"User does not exist!"
     })
   }
   
