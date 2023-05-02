@@ -18,7 +18,7 @@ const hashCompare =  async(password,hashedPassword)=>{
 
 
 const createToken = async(payload)=>{
-    let token = await jwt.sign(payload,process.env.SECRET_KEY,{expiresIn:'1m'})
+    let token = await jwt.sign(payload,process.env.SECRET_KEY,{expiresIn:'6h'})
     return token
 }
 
@@ -48,7 +48,7 @@ const roleAdminGuard = async (req,res,next)=>{
 
         let token = req.headers.authorization.split(" ")[1];
         let data = await jwt.decode(token);
-        if(data.role === 'admin'){
+        if(data.role === 'admin' || data.role === 'manager' ||  data.role === 'employee'){
             next()
         }else{
             res.status(402).send({

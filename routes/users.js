@@ -29,7 +29,7 @@ router.get('/', validate,roleAdminGuard, async(req, res, next)=>{
 
 router.get('/:id', async(req, res, next)=>{
   try{
-    let users = await userModel.findOne({_id:req.params.id});
+    let users = await userModel.findOne({_id:req.body.id});
     res.status(200).send({
       users,
       message:"User data fetch successfull by ID"
